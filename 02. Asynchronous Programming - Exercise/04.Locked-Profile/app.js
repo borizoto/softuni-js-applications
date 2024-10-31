@@ -66,8 +66,7 @@ function lockedProfile() {
             labelUsername,
             inputElementText,
             usernameDiv,
-            btn,
-            document.createElement('hr'));
+            btn);
 
         // Adding event listner to the view button
         btn.addEventListener("click", function () {
