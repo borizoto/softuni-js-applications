@@ -5,6 +5,7 @@ function lockedProfile() {
     demoProfileRef.remove();
     const url = 'http://localhost:3030/jsonstore/advanced/profiles';
     const _ = undefined;
+    let id = 1;
 
     fetch(url)
         .then(response => response.json())
@@ -19,33 +20,26 @@ function lockedProfile() {
     function createProfile({ _id, age, email, username }) {
         //Here we start making the profile div with the button
         const imgElement = elementFactory("img", { src: "./iconProfile2.png", class: "userIcon" });
-
         const labelLockElement = elementFactory("label", _, "Lock");
-
-        const radioInputElementLock = elementFactory("input", { type: "radio", name: _id, value: "lock", checked: true });
-
+        const radioInputElementLock = elementFactory("input", { type: "radio", name: `user${id}Locked`, value: "lock", checked: true });
         const labelUnlockElement = elementFactory("label", _, "Unlock");
-
-        const inputElementUnlocked = elementFactory("input", { type: "radio", name: _id, value: "unlock" });
-
+        const inputElementUnlocked = elementFactory("input", { type: "radio", name: `user${id}Locked`, value: "unlock" });
         const labelUsername = elementFactory("label", _, "Username");
-
-        const inputElementText = elementFactory("input", { type: "text", name: username, value: username, disabled: true, readOnly: true });
-
+        const inputElementText = elementFactory("input", { type: "text", name: `user${id}Username`, value: username, disabled: true, readOnly: true });
         const btn = elementFactory("button", _, "Show more");
 
         // Here we start making the Username div.       
         const emailLabel = elementFactory("label", _, "Email:")
-
-        const inputElementEmail = elementFactory("input", { type: "email", name: email, value: email, disabled: true, readOnly: true });
-
+        const inputElementEmail = elementFactory("input", { type: "email", name: `user${id}Email`, value: email, disabled: true, readOnly: true });
         const ageLabel = elementFactory("label", _, "Age:");
+        const inputElementAge = elementFactory("input", { type: "number", name: `user${id}Age`, value: age, disabled: true, readOnly: true });
 
-        const inputElementAge = elementFactory("input", { type: "number", name: age, value: age, disabled: true, readOnly: true });
+        id++;
 
         //Here we create the Username div and append every element of the div to the same div
         const usernameDiv = elementFactory("div",
-            { class: _id },
+            { class: `user${id}Username` },
+            document.createElement('hr'),
             emailLabel,
             inputElementEmail,
             ageLabel,
